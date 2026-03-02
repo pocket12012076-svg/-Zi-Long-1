@@ -72,7 +72,7 @@ export default function Hero({ title, subtitle, subscribeText, btnAuthor, btnBoo
               className="block w-full h-full"
             >
               <img 
-                src="/hero_cat.jpg.png" 
+               src="/listen_cat.jpg" 
                 alt="The Watcher - Black Cat"
                 className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-1000"
                 referrerPolicy="no-referrer"
