@@ -646,4 +646,3 @@ export default function DialogueModal({ isOpen, onClose, lang }: DialogueModalPr
     </AnimatePresence>
   );
 }
-
