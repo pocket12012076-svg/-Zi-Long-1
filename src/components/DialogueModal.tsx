@@ -87,7 +87,7 @@ const dialogues = [
     title: "暗示的實例"
   },
   { 
-     id: "Q12", 
+    id: "Q12", 
     displayId: "Q2",
     part: 2,
     q: "呈上題，媽媽難道不想念她的女兒嗎？妳認為的思念又是怎麼回事呢？", 
@@ -143,7 +143,7 @@ const dialogues = [
     title: "休息的重要"
   },
   { 
-     id: "Q19", 
+    id: "Q19", 
     displayId: "Q9",
     part: 2,
     q: "妳常提到的「生存」聽起來很艱辛，妳所定義的生存究竟是什麼？", 
@@ -183,7 +183,7 @@ const dialogues = [
     title: "原諒的暗示"
   },
   { 
-      id: "Q24", 
+    id: "Q24", 
     displayId: "Q14",
     part: 2,
     q: "讀者想知道，在「關於我成為作家的10個QA」的Q3提到小說是場意外的收穫，妳還有沒有其他的意外收穫呢？", 
