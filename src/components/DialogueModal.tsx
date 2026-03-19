@@ -207,7 +207,7 @@ const dialogues = [
     title: "犧牲與愛"
   },
   { 
-      id: "Q27", 
+    id: "Q27", 
     displayId: "Q17",
     part: 2,
     q: "呈上題，順著動物性的理論，對於人類才有的後悔和遺憾，妳是怎麼看待的？", 
