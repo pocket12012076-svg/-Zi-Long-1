@@ -7,7 +7,7 @@ export default function AwarenessQuiz({ lang, onBack }: { lang: Lang; onBack?: (
   const [step, setStep] = useState(0);
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#ffffff", color: "#333333", padding: "5rem 2rem", fontFamily: "serif" }}>
+    <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "#ffffff", color: "#333333", overflowY: "auto", zIndex: 9999, padding: "5rem 2rem", fontFamily: "serif" }}>
       <button onClick={onBack} style={{ background: "none", border: "1px solid #ccc", color: "#333", cursor: "pointer", padding: "0.5rem 1rem", marginBottom: "2rem" }}>
         返回
       </button>
