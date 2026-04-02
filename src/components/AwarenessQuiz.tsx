@@ -78,7 +78,7 @@ export default function AwarenessQuiz({ lang, onBack }: AwarenessQuizProps) {
           <button
             key={l}
             onClick={() => {}}
-            className={px-3 py-1 text-xs font-mono rounded-full transition-all ${
+            className={ px-3 py-1 text-xs font-mono rounded-full transition-all ${
               l === lang
                 ? "bg-accent text-bg"
                 : "text-muted hover:text-accent border border-accent/20"
