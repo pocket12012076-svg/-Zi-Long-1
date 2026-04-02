@@ -62,8 +62,8 @@ export default function Values({ lang }: { lang: string }) {
     },
     en: {
       coreValues: "Core Values",
-      noteTitle: "[Zi Long's Deep Awareness Notes: 24 Survival Dialogues]",
-      noteDesc: <>In others' scripts, you are just a named character.<br/><br/>These 24 dialogues are divided into two parts. Part I [10 QAs on How I Became a Writer] records the authentic process of my creation and awareness; Part II is the advanced version [Zi Long's Deep Awareness Notes].<br/><br/>To help you find your lost original voice, you can enter sequentially from Q1 of [Zi Long's Deep Awareness Notes] to strip away the costumes that don't belong to you; or use the "Value Map" below to redefine yourself on the survival coordinates you need.</>,
+      noteTitle: "[Zi Long's Deep Awareness Notes: 28 Survival Dialogues]",
+      noteDesc: <>In others' scripts, you are just a named character.<br/><br/>These 28 dialogues are divided into two parts. Part I [10 QAs on How I Became a Writer] records the authentic process of my creation and awareness; Part II is the advanced version [Zi Long's Deep Awareness Notes].<br/><br/>To help you find your lost original voice, you can enter sequentially from Q1 of [Zi Long's Deep Awareness Notes] to strip away the costumes that don't belong to you; or use the "Value Map" below to redefine yourself on the survival coordinates you need.</>,
       values: [
         {
           id: "01",
@@ -93,8 +93,8 @@ export default function Values({ lang }: { lang: string }) {
     },
     ja: {
       coreValues: "Core Values",
-      noteTitle: "【子瓏の深度察覚ノート：24の生存対話】",
-      noteDesc: <>他人の台本の中では、あなたは単に名前を付けられた登場人物に過ぎません。<br/><br/>この24の対話は二部構成です。第一部【私が作家になるまでの10のQA】は、私の創作と気づきの真実のプロセスを記録しています。第二部は上級編【子瓏の深度察覚ノート】です。<br/><br/>失われた本来の声を取り戻すために、【子瓏の深度察覚ノート】のQ1から順に入り、自分のものではない装いを取り除くことができます。あるいは、以下の「バリューマップ」を利用して、必要な生存座標の上で自分を再定義してください。</>,
+      noteTitle: "【子瓏の深度察覚ノート：28の生存対話】",
+      noteDesc: <>他人の台本の中では、あなたは単に名前を付けられた登場人物に過ぎません。<br/><br/>この28の対話は二部構成です。第一部【私が作家になるまでの10のQA】は、私の創作と気づきの真実のプロセスを記録しています。第二部は上級編【子瓏の深度察覚ノート】です。<br/><br/>失われた本来の声を取り戻すために、【子瓏の深度察覚ノート】のQ1から順に入り、自分のものではない装いを取り除くことができます。あるいは、以下の「バリューマップ」を利用して、必要な生存座標の上で自分を再定義してください。</>,
       values: [
         {
           id: "01",
