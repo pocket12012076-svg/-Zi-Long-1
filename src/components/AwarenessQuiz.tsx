@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import quizContent from "./quizContent";
 
@@ -32,97 +31,97 @@ export default function AwarenessQuiz({ lang, onBack }: { lang: Lang; onBack?: (
   const isNewGroup = currentIndex === 0 || currentQuestion.group !== questions[currentIndex - 1].group;
 
   return (
-    <div className="min-h-screen bg-bg text-ink flex flex-col">
+    <div style={{ minHeight: "100vh", backgroundColor: "var(--bg, #1A1A1A)", color: "var(--ink, #333)", display: "flex", flexDirection: "column" }}>
+      {/* Progress bar */}
       {phase === "quiz" && (
-        <div className="fixed top-0 left-0 right-0 h-[2px] bg-accent/10 z-[60]">
-          <motion.div className="h-full bg-accent origin-left" initial={{ scaleX: 0 }} animate={{ scaleX: progress / 100 }} transition={{ duration: 0.6, ease: "easeOut" }} />
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: "2px", backgroundColor: "rgba(255,255,255,0.1)", zIndex: 60 }}>
+          <div style={{ height: "100%", backgroundColor: "var(--accent, #c9a96e)", width: progress + "%", transition: "width 0.6s ease" }} />
         </div>
       )}
 
+      {/* Back button */}
       {onBack && (
-        <div className="fixed top-6 left-6 z-[50]">
-          <button onClick={onBack} className="text-muted hover:text-accent transition-colors text-sm font-mono tracking-wider">
-            {"\u2190 \u8fd4\u56de"}
+        <div style={{ position: "fixed", top: "1.5rem", left: "1.5rem", zIndex: 50 }}>
+          <button onClick={onBack} style={{ background: "none", border: "none", color: "var(--accent, #c9a96e)", cursor: "pointer", fontSize: "0.875rem", fontFamily: "monospace", letterSpacing: "0.05em" }}>
+            &larr; {"\u8fd4\u56de"}
           </button>
         </div>
       )}
 
-      <div className="fixed top-6 right-6 z-[50] flex gap-2">
-        {(["zh", "en", "ja"] as Lang[]).map((l) => (
-          <button key={l} onClick={() => {}} className={l === lang ? "px-3 py-1 text-xs font-mono rounded-full bg-accent text-bg transition-all" : "px-3 py-1 text-xs font-mono rounded-full text-muted hover:text-accent border border-accent/20 transition-all"}>
-            {l === "zh" ? "\u4e2d" : l === "en" ? "EN" : "\u65e5"}
-          </button>
-        ))}
-      </div>
+      {/* Content */}
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "6rem 1.5rem", paddingTop: "4rem" }}>
 
-      <div className="flex-1 flex items-center justify-center px-6 py-24">
-        <AnimatePresence mode="wait">
+        {/* INTRO */}
+        {phase === "intro" && (
+          <div style={{ maxWidth: "42rem", margin: "0 auto", textAlign: "center" }}>
+            <h1 style={{ fontSize: "clamp(1.875rem, 5vw, 2.25rem)", fontFamily: "serif", fontWeight: "bold", marginBottom: "3rem", color: "var(--ink, #333)" }}>
+              {lang === "zh" ? "\u5bdf\u89ba\u6e2c\u9a57" : lang === "en" ? "Awareness Quiz" : "\u6c17\u3065\u304d\u306e\u30c6\u30b9\u30c8"}
+              <br />
+              <span style={{ color: "var(--accent, #c9a96e)" }}>
+                {lang === "zh" ? "\u2014 \u8207\u81ea\u5df1\u5c0d\u8a71 \u2014" : lang === "en" ? "\u2014 A Dialogue with Yourself \u2014" : "\u2014 \u81ea\u5206\u3068\u306e\u5bfe\u8a71 \u2014"}
+              </span>
+            </h1>
+            <div style={{ marginBottom: "4rem", lineHeight: 2, fontSize: "1.125rem", opacity: 0.7, color: "var(--ink, #333)" }}>
+              {quizContent.intro[lang].map((line, i) => (
+                <p key={i} style={{ marginBottom: "1rem" }}>{line}</p>
+              ))}
+            </div>
+            <p style={{ fontSize: "0.875rem", marginBottom: "4rem", color: "var(--muted, #888)" }}>
+              {quizContent.beforeStart[lang]}
+            </p>
+            <button onClick={() => setPhase("quiz")} style={{ padding: "1.25rem 3rem", backgroundColor: "var(--accent, #c9a96e)", color: "var(--bg, #1A1A1A)", border: "none", borderRadius: "9999px", fontWeight: "bold", fontSize: "1.25rem", cursor: "pointer" }}>
+              {lang === "zh" ? "\u958b\u59cb" : lang === "en" ? "Begin" : "\u59cb\u3081\u308b"}
+            </button>
+          </div>
+        )}
 
-          {phase === "intro" && (
-            <motion.div key="intro" className="max-w-2xl mx-auto text-center" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.8, ease: "easeOut" }}>
-              <h1 className="text-3xl md:text-4xl font-serif font-bold mb-12 text-ink">
-                {lang === "zh" ? "\u5bdf\u89ba\u6e2c\u9a57" : lang === "en" ? "Awareness Quiz" : "\u6c17\u3065\u304d\u306e\u30c6\u30b9\u30c8"}
-                <br />
-                <span className="text-accent">
-                  {lang === "zh" ? "\u2014 \u8207\u81ea\u5df1\u5c0d\u8a71 \u2014" : lang === "en" ? "\u2014 A Dialogue with Yourself \u2014" : "\u2014 \u81ea\u5206\u3068\u306e\u5bfe\u8a71 \u2014"}
-                </span>
-              </h1>
-              <div className="space-y-4 text-ink/70 text-lg leading-[2] mb-16">
-                {quizContent.intro[lang].map((line, i) => (
-                  <motion.p key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + i * 0.2 }}>{line}</motion.p>
-                ))}
+        {/* QUIZ */}
+        {phase === "quiz" && currentQuestion && (
+          <div style={{ maxWidth: "48rem", margin: "0 auto", width: "100%" }}>
+            <div style={{ marginBottom: "2rem" }}>
+              <span style={{ fontFamily: "monospace", fontSize: "0.75rem", letterSpacing: "0.1em" }}>{currentIndex + 1} / {questions.length}</span>
+            </div>
+            {isNewGroup && (
+              <div style={{ marginBottom: "3rem" }}>
+                <h2 style={{ fontSize: "1.25rem", fontFamily: "serif", fontWeight: "bold", color: "var(--accent, #c9a96e)", marginBottom: "0.5rem" }}>
+                  {currentQuestion.groupTitle[lang]}
+                </h2>
+                <div style={{ width: "4rem", height: "1px", backgroundColor: "rgba(201,169,110,0.3)" }} />
               </div>
-              <motion.p className="text-muted text-sm mb-16" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>{quizContent.beforeStart[lang]}</motion.p>
-              <motion.button onClick={() => setPhase("quiz")} className="px-12 py-5 bg-accent text-bg rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }}>
-                {lang === "zh" ? "\u958b\u59cb" : lang === "en" ? "Begin" : "\u59cb\u3081\u308b"}
-              </motion.button>
-            </motion.div>
-          )}
-
-          {phase === "quiz" && currentQuestion && (
-            <motion.div key={"q-" + currentIndex} className="max-w-3xl mx-auto w-full" initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -60 }} transition={{ duration: 0.5, ease: "easeOut" }}>
-              <div className="mb-8">
-                <span className="mono-label">{currentIndex + 1} / {questions.length}</span>
-              </div>
-              {isNewGroup && (
-                <motion.div className="mb-12" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-                  <h2 className="text-xl font-serif font-bold text-accent mb-2">{currentQuestion.groupTitle[lang]}</h2>
-                  <div className="w-16 h-px bg-accent/30" />
-                </motion.div>
-              )}
-              <motion.p className={["text-2xl md:text-3xl font-serif leading-[1.8] text-ink", currentQuestion.isClosing ? "text-accent italic" : ""].filter(Boolean).join(" ")} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-                {currentQuestion.text[lang]}
-              </motion.p>
-              <div className="h-32" />
-              <motion.div className="flex items-center justify-between" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-                {currentIndex > 0 ? (
-                  <button onClick={() => setCurrentIndex((i) => i - 1)} className="text-muted hover:text-accent transition-colors text-sm font-mono tracking-wider">
-                    {"\u2190 " + (lang === "zh" ? "\u4e0a\u4e00\u984c" : lang === "en" ? "Previous" : "\u524d\u3078")}
-                  </button>
-                ) : <div />}
-                <button onClick={() => currentIndex < questions.length - 1 ? setCurrentIndex((i) => i + 1) : setPhase("result")} className="px-8 py-3 bg-accent/10 text-accent rounded-full font-mono text-sm tracking-wider hover:bg-accent/20 transition-all border border-accent/20">
-                  {currentIndex === questions.length - 1 ? (lang === "zh" ? "\u5b8c\u6210" : lang === "en" ? "Finish" : "\u7d42\u308f\u308b") : (lang === "zh" ? "\u4e0b\u4e00\u984c" : lang === "en" ? "Next" : "\u6b21\u3078")} {" \u2192"}
+            )}
+            <p style={{ fontSize: "clamp(1.5rem, 4vw, 1.875rem)", fontFamily: "serif", lineHeight: 1.8, color: currentQuestion.isClosing ? "var(--accent, #c9a96e)" : "var(--ink, #333)", fontStyle: currentQuestion.isClosing ? "italic" : "normal" }}>
+              {currentQuestion.text[lang]}
+            </p>
+            <div style={{ height: "8rem" }} />
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              {currentIndex > 0 ? (
+                <button onClick={() => setCurrentIndex((i) => i - 1)} style={{ background: "none", border: "none", color: "var(--muted, #888)", cursor: "pointer", fontSize: "0.875rem", fontFamily: "monospace" }}>
+                  &larr; {lang === "zh" ? "\u4e0a\u4e00\u984c" : lang === "en" ? "Previous" : "\u524d\u3078"}
                 </button>
-              </motion.div>
-            </motion.div>
-          )}
+              ) : <div />}
+              <button onClick={() => currentIndex < questions.length - 1 ? setCurrentIndex((i) => i + 1) : setPhase("result")} style={{ padding: "0.75rem 2rem", backgroundColor: "rgba(201,169,110,0.1)", color: "var(--accent, #c9a96e)", borderRadius: "9999px", fontFamily: "monospace", fontSize: "0.875rem", border: "1px solid rgba(201,169,110,0.2)", cursor: "pointer" }}>
+                {currentIndex === questions.length - 1 ? (lang === "zh" ? "\u5b8c\u6210" : lang === "en" ? "Finish" : "\u7d42\u308f\u308b") : (lang === "zh" ? "\u4e0b\u4e00\u984c" : lang === "en" ? "Next" : "\u6b21\u3078")} &rarr;
+              </button>
+            </div>
+          </div>
+        )}
 
-          {phase === "result" && (
-            <motion.div key="result" className="max-w-2xl mx-auto text-center" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
-              <div className="space-y-6 text-ink/80 text-xl leading-[2.2] mb-20">
-                {quizContent.result[lang].map((line, i) => (
-                  <motion.p key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 + i * 0.4 }} className={i === quizContent.result[lang].length - 1 ? "text-accent italic font-serif" : ""}>
-                    {line}
-                  </motion.p>
-                ))}
-              </div>
-              <motion.button onClick={() => { setPhase("intro"); setCurrentIndex(0); }} className="px-10 py-4 bg-accent/10 text-accent rounded-full font-mono text-sm tracking-wider hover:bg-accent/20 transition-all border border-accent/20" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }}>
-                {lang === "zh" ? "\u91cd\u65b0\u958b\u59cb" : lang === "en" ? "Start Over" : "\u3082\u3046\u4e00\u5ea6"} {" \u2192"}
-              </motion.button>
-            </motion.div>
-          )}
+        {/* RESULT */}
+        {phase === "result" && (
+          <div style={{ maxWidth: "42rem", margin: "0 auto", textAlign: "center" }}>
+            <div style={{ marginBottom: "5rem", lineHeight: 2.2, fontSize: "1.25rem", opacity: 0.8, color: "var(--ink, #333)" }}>
+              {quizContent.result[lang].map((line, i) => (
+                <p key={i} style={{ marginBottom: "1.5rem", fontStyle: i === quizContent.result[lang].length - 1 ? "italic" : "normal", fontFamily: i === quizContent.result[lang].length - 1 ? "serif" : "inherit", color: i === quizContent.result[lang].length - 1 ? "var(--accent, #c9a96e)" : "inherit" }}>
+                  {line}
+                </p>
+              ))}
+            </div>
+            <button onClick={() => { setPhase("intro"); setCurrentIndex(0); }} style={{ padding: "1rem 2.5rem", backgroundColor: "rgba(201,169,110,0.1)", color: "var(--accent, #c9a96e)", borderRadius: "9999px", fontFamily: "monospace", fontSize: "0.875rem", border: "1px solid rgba(201,169,110,0.2)", cursor: "pointer" }}>
+              {lang === "zh" ? "\u91cd\u65b0\u958b\u59cb" : lang === "en" ? "Start Over" : "\u3082\u3046\u4e00\u5ea6"} &rarr;
+            </button>
+          </div>
+        )}
 
-        </AnimatePresence>
       </div>
     </div>
   );
