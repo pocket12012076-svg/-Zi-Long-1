@@ -29,10 +29,10 @@ export default function AwarenessQuiz({ lang, onBack }: { lang: Lang; onBack?: (
   }, [phase, currentIndex]);
 
   return (
-    <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "#ffffff", color: "#333333", overflowY: "auto", zIndex: 9999, fontFamily: "serif" }}>
+    <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "#0d0d0d", color: "#e0e0e0", overflowY: "auto", zIndex: 9999, fontFamily: "serif" }}>
 
       {phase === "quiz" && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: "3px", backgroundColor: "#eee", zIndex: 60 }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: "3px", backgroundColor: "rgba(255,255,255,0.1)", zIndex: 60 }}>
           <div style={{ height: "100%", backgroundColor: "#c9a96e", width: progress + "%", transition: "width 0.6s ease" }} />
         </div>
       )}
@@ -57,12 +57,12 @@ export default function AwarenessQuiz({ lang, onBack }: { lang: Lang; onBack?: (
               </span>
             </h1>
             {quizContent.intro[lang].map((line, i) => (
-              <p key={i} style={{ marginBottom: "1rem", lineHeight: 2, color: "#666" }}>{line}</p>
+              <p key={i} style={{ marginBottom: "1rem", lineHeight: 2, color: "#aaa" }}>{line}</p>
             ))}
-            <p style={{ fontSize: "0.875rem", marginBottom: "2rem", color: "#999" }}>
+            <p style={{ fontSize: "0.875rem", marginBottom: "2rem", color: "#777" }}>
               {quizContent.beforeStart[lang]}
             </p>
-            <button onClick={() => setPhase("quiz")} style={{ padding: "1rem 3rem", backgroundColor: "#c9a96e", color: "#fff", border: "none", borderRadius: "9999px", fontWeight: "bold", fontSize: "1.25rem", cursor: "pointer" }}>
+            <button onClick={() => setPhase("quiz")} style={{ padding: "1rem 3rem", backgroundColor: "#c9a96e", color: "#0d0d0d", border: "none", borderRadius: "9999px", fontWeight: "bold", fontSize: "1.25rem", cursor: "pointer" }}>
               {lang === "zh" ? "開始" : lang === "en" ? "Begin" : "始める"}
             </button>
           </div>
@@ -70,7 +70,7 @@ export default function AwarenessQuiz({ lang, onBack }: { lang: Lang; onBack?: (
 
         {phase === "quiz" && currentQuestion && (
           <div style={{ maxWidth: "700px", width: "100%" }}>
-            <div style={{ marginBottom: "1.5rem", fontSize: "0.875rem", fontFamily: "monospace" }}>
+            <div style={{ marginBottom: "1.5rem", fontSize: "0.875rem", fontFamily: "monospace", color: "#777" }}>
               {currentIndex + 1} / {questions.length}
             </div>
             {isNewGroup && (
@@ -78,20 +78,20 @@ export default function AwarenessQuiz({ lang, onBack }: { lang: Lang; onBack?: (
                 <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#c9a96e" }}>
                   {currentQuestion.groupTitle[lang]}
                 </h2>
-                <div style={{ width: "4rem", height: "1px", backgroundColor: "#c9a96e", opacity: 0.3 }} />
+                <div style={{ width: "4rem", height: "1px", backgroundColor: "rgba(201,169,110,0.3)" }} />
               </div>
             )}
-            <p style={{ fontSize: "1.5rem", lineHeight: 1.8, fontStyle: currentQuestion.isClosing ? "italic" : "normal", color: currentQuestion.isClosing ? "#c9a96e" : "#333" }}>
+            <p style={{ fontSize: "1.5rem", lineHeight: 1.8, fontStyle: currentQuestion.isClosing ? "italic" : "normal", color: currentQuestion.isClosing ? "#c9a96e" : "#e0e0e0" }}>
               {currentQuestion.text[lang]}
             </p>
             <div style={{ height: "6rem" }} />
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               {currentIndex > 0 ? (
-                <button onClick={() => setCurrentIndex((i) => i - 1)} style={{ background: "none", border: "none", color: "#999", cursor: "pointer" }}>
+                <button onClick={() => setCurrentIndex((i) => i - 1)} style={{ background: "none", border: "none", color: "#777", cursor: "pointer" }}>
                   ← {lang === "zh" ? "上一題" : lang === "en" ? "Previous" : "前へ"}
                 </button>
               ) : <div />}
-              <button onClick={() => currentIndex < questions.length - 1 ? setCurrentIndex((i) => i + 1) : setPhase("result")} style={{ padding: "0.75rem 2rem", backgroundColor: "#c9a96e", color: "#fff", borderRadius: "9999px", border: "none", cursor: "pointer" }}>
+              <button onClick={() => currentIndex < questions.length - 1 ? setCurrentIndex((i) => i + 1) : setPhase("result")} style={{ padding: "0.75rem 2rem", backgroundColor: "rgba(201,169,110,0.15)", color: "#c9a96e", borderRadius: "9999px", border: "1px solid rgba(201,169,110,0.3)", cursor: "pointer" }}>
                 {currentIndex === questions.length - 1 ? (lang === "zh" ? "完成" : lang === "en" ? "Finish" : "終わる") : (lang === "zh" ? "下一題" : lang === "en" ? "Next" : "次へ")} →
               </button>
             </div>
@@ -101,11 +101,11 @@ export default function AwarenessQuiz({ lang, onBack }: { lang: Lang; onBack?: (
         {phase === "result" && (
           <div style={{ maxWidth: "600px", textAlign: "center" }}>
             {quizContent.result[lang].map((line, i) => (
-              <p key={i} style={{ marginBottom: "1.5rem", lineHeight: 2.2, fontSize: "1.125rem", fontStyle: i === quizContent.result[lang].length - 1 ? "italic" : "normal", color: i === quizContent.result[lang].length - 1 ? "#c9a96e" : "#555" }}>
+              <p key={i} style={{ marginBottom: "1.5rem", lineHeight: 2.2, fontSize: "1.125rem", fontStyle: i === quizContent.result[lang].length - 1 ? "italic" : "normal", color: i === quizContent.result[lang].length - 1 ? "#c9a96e" : "#bbb" }}>
                 {line}
               </p>
             ))}
-            <button onClick={() => { setPhase("intro"); setCurrentIndex(0); }} style={{ padding: "1rem 2.5rem", backgroundColor: "transparent", color: "#c9a96e", borderRadius: "9999px", border: "1px solid #c9a96e", cursor: "pointer" }}>
+            <button onClick={() => { setPhase("intro"); setCurrentIndex(0); }} style={{ padding: "1rem 2.5rem", backgroundColor: "transparent", color: "#c9a96e", borderRadius: "9999px", border: "1px solid rgba(201,169,110,0.3)", cursor: "pointer" }}>
               {lang === "zh" ? "重新開始" : lang === "en" ? "Start Over" : "もう一度"} →
             </button>
           </div>
