@@ -12,9 +12,11 @@ import { motion, useScroll, useSpring } from "motion/react";
 import { MinimalCat } from "./components/Icons";
 import { useState } from "react";
 import SubscriptionModal from "./components/SubscriptionModal";
+import AwarenessQuiz from "./components/AwarenessQuiz";
 
 export default function App() {
   const [isSubModalOpen, setIsSubModalOpen] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [lang, setLang] = useState("zh");
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -39,6 +41,7 @@ export default function App() {
       ctaTitle: <>準備好奪回你的<br/><span className="italic">認知主權</span>了嗎？</>,
       ctaDesc: "我們將深入探討認知主權與邊界建構",
       subscribe: "訂閱子瓏",
+      quiz: "察覺測驗",
       btnAuthor: "關於作家-子瓏",
       btnBook: "小說-傾聽我 接住我"
     },
@@ -57,6 +60,7 @@ export default function App() {
       ctaTitle: <>Ready to reclaim your<br/><span className="italic">Cognitive Sovereignty</span>?</>,
       ctaDesc: "We explore cognitive sovereignty and boundary construction",
       subscribe: "Subscribe to Zi Long",
+      quiz: "Awareness Quiz",
       btnAuthor: "About Author",
       btnBook: "Novel - Listen to Me"
     },
@@ -75,6 +79,7 @@ export default function App() {
       ctaTitle: <>あなたの<span className="italic">認知的主権</span>を<br/>取り戻す準備はできていますか？</>,
       ctaDesc: "認知的主權と境界構築を深く探求します",
       subscribe: "子瓏（ズーロン）を購読する",
+      quiz: "気づきのテスト",
       btnAuthor: "作家について",
       btnBook: "小説 - 私を聴いて"
     }
@@ -178,10 +183,10 @@ export default function App() {
               {t.ctaDesc}
             </p>
             <button 
-              onClick={() => setIsSubModalOpen(true)}
+              onClick={() => setIsQuizOpen(true)}
               className="px-12 py-5 bg-bg text-accent rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-2xl"
             >
-              {t.subscribe}
+              {t.quiz}
             </button>
           </div>
         </section>
@@ -192,6 +197,12 @@ export default function App() {
       <Footer lang={lang} />
       
       <SubscriptionModal isOpen={isSubModalOpen} onClose={() => setIsSubModalOpen(false)} lang={lang} />
+      {isQuizOpen && (
+  <AwarenessQuiz
+    lang={lang}
+    onBack={() => setIsQuizOpen(false)}
+  />
+)}
     </div>
   );
 }
